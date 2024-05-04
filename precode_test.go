@@ -21,7 +21,7 @@ func TestMainHandlerWheOK(t *testing.T) {
 	response := responseRecorder.Result()
 
 	//проверка возврата код ответа - 200
-	assert.Equal(t, 200, response.StatusCode, "Unexpected status code")
+	require.Equal(t, http.StatusOK, response.StatusCode, "Unexpected status code")
 	//тело ответа не пустое
 	assert.NotEmpty(t, response.Body, "Response body is empty")
 
@@ -57,6 +57,6 @@ func TestMainHandlerWhenWrongCity(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, response.StatusCode, "Unexepected status code")
 	body, _ := io.ReadAll(response.Body)
 	//проверяем что тело ответа содержитт сообщение об ошибке
-	require.Contains(t, string(body), "wrong city value")
+	assert.Contains(t, string(body), "wrong city value")
 
 }
