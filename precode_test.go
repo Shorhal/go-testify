@@ -54,7 +54,7 @@ func TestMainHandlerWhenWrongCity(t *testing.T) {
 
 	response := responseRecorder.Result()
 
-	assert.Equal(t, http.StatusBadRequest, response.StatusCode, "Unexepected status code")
+	require.Equal(t, http.StatusBadRequest, response.StatusCode, "Unexepected status code")
 	body, _ := io.ReadAll(response.Body)
 	//проверяем что тело ответа содержитт сообщение об ошибке
 	assert.Contains(t, string(body), "wrong city value")
